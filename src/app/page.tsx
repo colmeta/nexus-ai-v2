@@ -1,9 +1,11 @@
 // src/app/page.tsx
+// FINAL VERSION - BASIC HOME PAGE WITH BUTTON
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import React from 'react';
 
-const styles = {
+const styles: { [key: string]: React.CSSProperties } = {
   button: { padding: '8px 16px', borderRadius: '8px', color: 'white', textDecoration: 'none' },
   greenButton: { backgroundColor: '#16a34a' },
   grayButton: { backgroundColor: '#4b5563' },
@@ -21,14 +23,10 @@ function AuthStatus() {
   useEffect(() => {
     if (new URLSearchParams(window.location.search).get('auth') === 'success') setIsConnected(true);
   }, []);
-
   if (isConnected) {
     return <div style={{ ...styles.button, ...styles.greenButton }}>✓ Calendar Connected</div>;
   }
-
-  return (
-    <a href="/api/auth/google/signin" style={{ ...styles.button, ...styles.grayButton }}>Connect Google Calendar</a>
-  );
+  return <a href="/api/auth/google/signin" style={{ ...styles.button, ...styles.grayButton }}>Connect Google Calendar</a>;
 }
 
 export default function HomePage() {
@@ -51,7 +49,7 @@ export default function HomePage() {
     } finally {
       setIsLoading(false);
     }
-};
+  };
 
   return (
     <main style={styles.container}>

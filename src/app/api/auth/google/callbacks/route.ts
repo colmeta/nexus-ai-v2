@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
 
   const url = new URL(req.url);
   const code = url.searchParams.get('code');
-  const homeUrl = process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_APP_URL! : 'http://localhost:3001';
+  const homeUrl = 'https://nexus-ai-platform.vercel.app';
 
   if (!code) {
     return NextResponse.redirect(`${homeUrl}/?auth=error&details=missing_code`);
@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
     const oauth2Client = new google.auth.OAuth2(
       process.env.GOOGLE_CLIENT_ID!,
       process.env.GOOGLE_CLIENT_SECRET!,
-      'http://localhost:3001/api/auth/google/callback'
+      'https://nexusai-eight.vercel.app/api/auth/google/callback'
     );
     const { tokens } = await oauth2Client.getToken(code);
 
